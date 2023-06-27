@@ -36,7 +36,7 @@ export default function Form() {
     const data = new FormData(e.currentTarget);
     
     try {
-      const response = await fetch('/api', {
+      const response = await fetch('/openai/api', {
         method: 'post',
         body: JSON.stringify(Object.fromEntries(data)),
         headers: {

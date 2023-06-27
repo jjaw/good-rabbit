@@ -16,15 +16,15 @@ const generateMessage = async ({
         },
         body: JSON.stringify({
           model: "text-ada-001",
-          prompt: `Write a nice short email that encourages positivity for my friend ${receipientName}. Some relevant information are ${extra}. The message should be not be more than 100 words. Keep it short and sweet. My name is ${senderName}. If I didn't give you a name, then it's irrelevant.`,
-          max_tokens: 100,
-          temperature: 0.5,
-          top_p: 0.5,
+          prompt: `Write a nice message (no more than 88 words) of positivity for ${receipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
+          max_tokens: 120,
+          temperature: 1,
+          top_p: 0.77,
         }),
       }
     );
     const GPTdata = await response.json();
-    console.log(process.env.OPENAI_API_KEY);
+
     return GPTdata.choices[0].text;
   } catch (err) {
     console.error(err);
