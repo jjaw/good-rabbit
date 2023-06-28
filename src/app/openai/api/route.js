@@ -57,7 +57,7 @@ export async function POST(req) {
     // Found the name.
     // Construct the response body as an object
     const responseData = {
-      data: `${body.senderName} ${body.receipientName} ${body.email} ${body.extra}`,
+      data: `${senderName} ${receipientName} ${email} ${extra}`,
       message: message
     };
    

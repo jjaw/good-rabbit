@@ -74,6 +74,7 @@ export default function Form() {
             type="text" 
             id="senderName" 
             name="senderName"
+            maxLength={50}
             value={formData.senderName}
             placeholder="Your Name (Optional)"
             onChange={handleInput}
@@ -86,6 +87,7 @@ export default function Form() {
             type="text" 
             id="receipientName" 
             name="receipientName" 
+            maxLength={88}
             value={formData.receipientName}
             placeholder="Their Name"
             onChange={handleInput}
@@ -98,6 +100,7 @@ export default function Form() {
             type="email" 
             id="email" 
             name="email" 
+            maxLength={50}
             value={formData.email}
             placeholder="Their Email"
             onChange={handleInput}
@@ -120,7 +123,7 @@ export default function Form() {
         </div>
         <button 
           type="submit"
-          className={`bg-transparent hover:bg-amber-600 text-amber-200 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded
+          className={`bg-transparent hover:bg-amber-600 text-amber-500 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded
             ${
               isGenerating || formData.email === "" || formData.receipientName == ""
                 ? "cursor-not-allowed opacity-50"
