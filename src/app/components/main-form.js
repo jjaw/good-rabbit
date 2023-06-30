@@ -1,6 +1,5 @@
 'use client';
 
-import { ResponseCookies } from "next/dist/compiled/@edge-runtime/cookies";
 import { useState } from "react";
 
 export default function Form() {
