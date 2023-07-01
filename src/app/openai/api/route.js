@@ -52,6 +52,7 @@ export async function POST(req) {
 
     const { senderName, recipientName, email, extra } = body;
     console.log("senderName, recipientName, email, and extra has value")
+    console.log("email: " + email);
     // Guard clause checks for reciepient's name,
     // and returns early if it is not found
     if (!body.recipientName) {
