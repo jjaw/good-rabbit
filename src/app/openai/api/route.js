@@ -109,7 +109,7 @@ export async function POST(req) {
 
     } catch (error) {
       console.error('Request failed with error:', error);
-      return new NextResponse(JSON.stringify({ error: "An error occurred" }), {
+      return new NextResponse(JSON.stringify({ error: "Error with sentiment analysis query" }), {
         status: 400,
         headers: {
           'Content-Type': 'application/json'
