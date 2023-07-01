@@ -84,7 +84,7 @@ export async function POST(req) {
         try {
           const data = await resend.emails.send({
             from: "hello@goodrabb.it",
-            to: "delivered@resend.dev", // For testing use delivered@resend.dev
+            to: email, // For testing use delivered@resend.dev
             subject: "Random act of positivity!",
             text: message,
             html: `<strong>${message}</strong>`,
