@@ -5,7 +5,7 @@ import { useState } from "react";
 export default function Form() {
   const [formData, setFormData] = useState({
     senderName: "",
-    receipientName: "",
+    recipientName: "",
     email: "",
     extra: ""
   });
@@ -82,13 +82,13 @@ export default function Form() {
           />
         </div>
         <div className="flex flex-col">
-          <label className="sr-only" htmlFor="receipientName">Recipient's Name:</label>
+          <label className="sr-only" htmlFor="recipientName">Recipient's Name:</label>
           <input 
             type="text" 
-            id="receipientName" 
-            name="receipientName" 
+            id="recipientName" 
+            name="recipientName" 
             maxLength={88}
-            value={formData.receipientName}
+            value={formData.recipientName}
             placeholder="Their Name"
             onChange={handleInput}
             className="px-2 block w-full rounded-md bg-white border border-gray-40 shadow-s focus:outline-none focus:outline-amber-300"
@@ -125,11 +125,11 @@ export default function Form() {
           type="submit"
           className={`bg-transparent hover:bg-amber-600 text-amber-500 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded
             ${
-              isGenerating || formData.email === "" || formData.receipientName == ""
+              isGenerating || formData.email === "" || formData.recipientName == ""
                 ? "cursor-not-allowed opacity-50"
                 : ""
             }`}
-          disabled={isGenerating || formData.email === "" || formData.receipientName == ""}
+          disabled={isGenerating || formData.email === "" || formData.recipientName == ""}
         >
           {isGenerating ? "Sending..." : "Send Positivity"}
         </button>
