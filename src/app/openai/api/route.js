@@ -70,8 +70,8 @@ export async function POST(req) {
       console.log("try sentiment analysis")
       const jsonResponse = await query(message);
       const label = jsonResponse[0][0].label;
-      console.log(message);
-      console.log(label);
+      console.log("Sentiment... " + label);
+      console.log("Message: " + message);
       if (label === "POSITIVE") {
         // Try to send email
         try {
