@@ -29,7 +29,7 @@ const baseUrl = process.env.VERCEL_URL
   : 'http://localhost:3000';
 
 const EmailTemplate = (
-  message, reciepientName, homeLink="",
+  message, reciepientName, homeLink="https://www.goodrabb.it",
 ) => (
   <Html>
     <Head />
