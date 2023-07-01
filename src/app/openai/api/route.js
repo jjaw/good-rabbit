@@ -42,7 +42,7 @@ const generateMessage = async ({
   }
 } 
 */
-export async function POST(req) {
+export default async function POST(req) {
   try {
     const body = await req.json();
   
