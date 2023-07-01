@@ -4,8 +4,6 @@ import { Resend } from "resend";
 import { query } from "@/app/components/senti-analysis";
 import generateMessage from "@/app/components/generate-message"
 
-export const runtime = `edge`
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 /*
 const generateMessage = async ({
@@ -42,7 +40,7 @@ const generateMessage = async ({
   }
 } 
 */
-export default async function POST(req) {
+export async function POST(req) {
   try {
     const body = await req.json();
   
