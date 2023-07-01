@@ -9,14 +9,14 @@ import { query } from "@/app/components/senti-analysis";
 
 // works for non vercel
 // 
- const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const generateMessage = async ({
-  receipientName,
+  recipientName,
   extra,
 }) => {
   try {
-    console.log("fetching from openapi");
+    console.log(process.env.OPENAI_API_KEY);
     const response = await fetch(
       "https://api.openai.com/v1/completions",
       {
@@ -27,7 +27,7 @@ const generateMessage = async ({
         },
         body: JSON.stringify({
           model: "text-davinci-003",
-          prompt: `Write a nice message (no more than 88 words) of positivity for ${receipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
+          prompt: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
           max_tokens: 120,
           temperature: 1,
           top_p: 0.77,
@@ -44,7 +44,7 @@ const generateMessage = async ({
     throw err;
   }
 } 
-console.log("fetched from openAI");
+
 export async function POST(req) {
   try {
     // Parse JSON data from ReadableStream
@@ -53,21 +53,21 @@ export async function POST(req) {
     // body.email
     // body.extra
     
-    console.log("waiting req from POST");
+
     const body = await req.json();
-    console.log("retrieve body");
+  
 
-    const { senderName, receipientName, email, extra } = body;
-
-    // Guard clause checks for recipient's name,
+    const { senderName, recipientName, email, extra } = body;
+    console.log("senderName, recipientName, email, and extra has value")
+    // Guard clause checks for reciepient's name,
     // and returns early if it is not found
-    if (!body.receipientName) {
+    if (!body.recipientName) {
       // Sends a HTTP bad request error code
       return new NextResponse('Recipient\'s name not found', { status: 400 });
     }
     console.log("generating message");
     const message = await generateMessage({
-      receipientName,
+      recipientName,
       extra,
     });
     console.log("message generated");
@@ -87,11 +87,11 @@ export async function POST(req) {
             subject: "Random act of positivity!",
             text: message,
             html: `<strong>${message}</strong>`,
-            react: EmailTemplate(message, receipientName)
+            react: EmailTemplate(message, recipientName)
           });
 
           const responseData = {
-            data: `${senderName} ${receipientName} ${email} ${extra}`,
+            data: `${senderName} ${recipientName} ${email} ${extra}`,
             message: message,
             success: "Email sent success",
             //react: EmailTemplate(message)
