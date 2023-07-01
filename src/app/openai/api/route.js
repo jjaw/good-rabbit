@@ -1,3 +1,5 @@
+'use client'
+
 import { NextResponse } from 'next/server';
 import EmailTemplate from "@/app/components/email-template";
 import { Resend } from "resend";
