@@ -16,7 +16,6 @@ const generateMessage = async ({
   extra,
 }) => {
   try {
-    console.log(process.env.OPENAI_API_KEY);
     const response = await fetch(
       "https://api.openai.com/v1/completions",
       {
@@ -48,13 +47,6 @@ const generateMessage = async ({
 
 export async function POST(req) {
   try {
-    // Parse JSON data from ReadableStream
-    // body.senderName
-    // body.recipientName
-    // body.email
-    // body.extra
-    
-
     const body = await req.json();
   
 
