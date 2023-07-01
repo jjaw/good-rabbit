@@ -2,14 +2,14 @@ import { NextResponse } from 'next/server';
 import EmailTemplate from "@/app/components/email-template";
 import { Resend } from "resend";
 import { query } from "@/app/components/senti-analysis";
-import { RESEND_API_KEY } from '$env/static/public';
+//import { RESEND_API_KEY } from '$env/static/public';
 
 // on vercel
-const resend = new Resend(RESEND_API_KEY);
+//const resend = new Resend(RESEND_API_KEY);
 
 // works for non vercel
 // 
-// const resend = new Resend(process.env.RESEND_API_KEY);
+ const resend = new Resend(process.env.RESEND_API_KEY);
 
 const generateMessage = async ({
   senderName,
