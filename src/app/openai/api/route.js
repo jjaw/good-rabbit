@@ -84,13 +84,21 @@ export async function POST(req) {
             react: EmailTemplate(message, receipientName)
           });
 
+          const responseData = {
+            data: `${senderName} ${receipientName} ${email} ${extra}`,
+            message: message,
+            success: "Email sent success",
+            //react: EmailTemplate(message)
+          };
           // Create the response with JSON data and Content-Type header
-          const response = new NextResponse(JSON.stringify({ success: "Email successfully sent."}), {
+          const response = new NextResponse(JSON.stringify({responseData}), {
             headers: {
               'Content-Type': 'application/json'
             }
           });
-          
+
+          // Return the response
+          return response;
         } catch (err) {
           // Error with outbound mail
           console.error('An error occurred:', err);
@@ -105,8 +113,6 @@ export async function POST(req) {
           }
         });
       }
-
-
     } catch (error) {
       console.error('Request failed with error:', error);
       return new NextResponse(JSON.stringify({ error: "Error with sentiment analysis query" }), {
@@ -117,19 +123,6 @@ export async function POST(req) {
       });
     }
     
-    const responseData = {
-      data: `${senderName} ${receipientName} ${email} ${extra}`,
-      message: message,
-      //react: EmailTemplate(message)
-    };
-
-    // Create the response with JSON data and Content-Type header
-    const response = new NextResponse(JSON.stringify(responseData), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    return response;
   } catch (error) {
     // Log the error and return a 500 status code
     console.error('An error occurred:', error);
