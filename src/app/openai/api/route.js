@@ -6,7 +6,7 @@ import generateMessage from "@/app/components/generate-message"
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export const runtime = 'edge'
+//export const runtime = 'edge'
 
 export async function POST(req) {
   try {
