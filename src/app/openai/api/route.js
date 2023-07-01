@@ -39,6 +39,7 @@ const generateMessage = async ({
     return GPTdata.choices[0].text;
   } catch (err) {
     console.error(err);
+    throw err;
   }
 } 
 
