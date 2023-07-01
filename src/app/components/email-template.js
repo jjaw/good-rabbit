@@ -1,13 +1,4 @@
-/*import React from "react";
-
-const EmailTemplate = (message) => (
-  <div >
-    <p>{message}</p>
-  </div>
-); 
-
-export default EmailTemplate;
-*/
+'use client'
 
 import React from 'react';
 import {
