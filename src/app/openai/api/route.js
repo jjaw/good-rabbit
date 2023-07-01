@@ -12,7 +12,6 @@ import { query } from "@/app/components/senti-analysis";
  const resend = new Resend(process.env.RESEND_API_KEY);
 
 const generateMessage = async ({
-  senderName,
   receipientName,
   extra,
 }) => {
@@ -35,11 +34,9 @@ const generateMessage = async ({
         }),
       }
     );
-    console.log("fetched from openAI");
-    console.log("getting json response")
     
     const GPTdata = await response.json();
-    console.log("GTPdata.json() successful")
+    
     
     return GPTdata.choices[0].text;
   } catch (err) {
@@ -47,7 +44,7 @@ const generateMessage = async ({
     throw err;
   }
 } 
-
+console.log("fetched from openAI");
 export async function POST(req) {
   try {
     // Parse JSON data from ReadableStream
@@ -70,9 +67,7 @@ export async function POST(req) {
     }
     console.log("generating message");
     const message = await generateMessage({
-      senderName,
       receipientName,
-      email,
       extra,
     });
     console.log("message generated");
