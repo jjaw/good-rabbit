@@ -4,9 +4,7 @@ import { Resend } from "resend";
 import { query } from "@/app/components/senti-analysis";
 import generateMessage from "@/app/components/generate-message"
 
-export const config = {
-  runtime: 'edge',
-}; 
+export const runtime = `edge`
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 /*
