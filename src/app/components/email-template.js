@@ -8,6 +8,7 @@ const EmailTemplate = (message) => (
 
 export default EmailTemplate;
 */
+
 import React from 'react';
 import {
   Body,
@@ -25,7 +26,7 @@ import {
 
 const baseUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : '';
+  : 'http://localhost:3000';
 
 const EmailTemplate = (
   message, reciepientName, homeLink="",
@@ -36,7 +37,7 @@ const EmailTemplate = (
     <Body style={main}>
       <Container style={container}>
         <Img
-          src="/goodrabbit_logo.png"
+          src={`${baseUrl}/goodrabbit_logo.png`}
           alt="Good Rabbit Logo"
           width={48}
           height={48}
@@ -53,18 +54,19 @@ const EmailTemplate = (
         </Text>
         <Text style={paragraph}>
             <Link style={link} href={homeLink}>
-              👉 Click here to send more positivity👈
+            🐰 Pass gRabbit forward! Click here to share positivity. 🐇
             </Link>
           </Text>
         <Hr style={hr} />
         <Img
-          src={``}
+          src={`${baseUrl}/goodrabbit_logo.png`}
+          alt="Good Rabbit Logo"
           width={32}
           height={32}
           style={{
             WebkitFilter: 'grayscale(100%)',
             filter: 'grayscale(100%)',
-            margin: '20px 0',
+            margin: '20px 0', 
           }}
         />
         <Text style={footer}>gRabbit is small dosage of positivity encouragement.</Text>

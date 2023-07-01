@@ -42,23 +42,24 @@ export default function Form() {
           'Content-Type': 'application/json',
         }
       });
-      if (!response.ok) {
-        throw new Error(`Invalide response: ${response.status}`);
-      }
-      alert('Some alert');
-      // wait for the response from the request
-      const responseData = await response.json();
 
-      // stringify the response
-      const dataJson = JSON.stringify(responseData);
-      
-      //console.log(responseData['data']); Call variable stored from response... check /api/route.js for keys
-      //console.log("response: " + Object.keys(responseData));
-      //console.log("response data: " + responseData);
-      //console.log("dataJson: " + dataJson + typeof dataJson);
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        if (errorResponse && errorResponse.error) {
+          throw new Error(errorResponse.error);
+        } else {
+          throw new Error("An error has occurred");
+        }
+      }
+      alert('Positivity sent to your friend~ gRabbit');
+
     } catch (err) {
       console.error(err);
-      alert("an error has occured");
+      if (err.message == "say nicer things~") {
+        alert("Say nice things ~ Spread positivity");
+      } else {
+        alert("an error has occured");
+      }
     }
     setIsGenerating(false);
   }
