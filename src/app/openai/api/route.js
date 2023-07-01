@@ -2,13 +2,14 @@ import { NextResponse } from 'next/server';
 import EmailTemplate from "@/app/components/email-template";
 import { Resend } from "resend";
 import { query } from "@/app/components/senti-analysis";
+import generateMessage from "@/app/components/generate-message"
 
 export const config = {
   runtime: 'edge',
 }; 
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
+/*
 const generateMessage = async ({
   recipientName,
   extra,
@@ -42,7 +43,7 @@ const generateMessage = async ({
     throw err;
   }
 } 
-
+*/
 export async function POST(req) {
   try {
     const body = await req.json();
