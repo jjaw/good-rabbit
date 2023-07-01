@@ -17,6 +17,7 @@ const generateMessage = async ({
   extra,
 }) => {
   try {
+    console.log("fetching from openapi");
     const response = await fetch(
       "https://api.openai.com/v1/completions",
       {
@@ -34,8 +35,12 @@ const generateMessage = async ({
         }),
       }
     );
+    console.log("fetched from openAI");
+    console.log("getting json response")
+    
     const GPTdata = await response.json();
-
+    console.log("GTPdata.json() successful")
+    
     return GPTdata.choices[0].text;
   } catch (err) {
     console.error(err);
@@ -50,7 +55,11 @@ export async function POST(req) {
     // body.recipientName
     // body.email
     // body.extra
+    
+    console.log("waiting req from POST");
     const body = await req.json();
+    console.log("retrieve body");
+
     const { senderName, receipientName, email, extra } = body;
 
     // Guard clause checks for recipient's name,
@@ -59,16 +68,17 @@ export async function POST(req) {
       // Sends a HTTP bad request error code
       return new NextResponse('Recipient\'s name not found', { status: 400 });
     }
-
+    console.log("generating message");
     const message = await generateMessage({
       senderName,
       receipientName,
       email,
       extra,
     });
-
+    console.log("message generated");
     // Text sentiment analysis
     try {
+      console.log("try sentiment analysis")
       const jsonResponse = await query(message);
       const label = jsonResponse[0][0].label;
       console.log(message);
