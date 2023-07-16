@@ -29,7 +29,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="w-7/12">
+      <div className="w-full sm:w-10/12 md:w-10/12 lg:w-10/12">
         <Form />
       </div>
 

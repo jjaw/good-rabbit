@@ -65,7 +65,7 @@ export default function Form() {
   }
 
   return(
-  <div className="max-w-7x1 w-full mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div className="max-w-7x1 w-full mx-auto sm:px-6 lg:px-8 py-12">
     <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
       <form onSubmit={handleSubmit} className="grid gap-y-5 text-amber-700 mx-2">
         <div className="flex flex-col">
