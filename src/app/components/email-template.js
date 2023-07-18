@@ -58,7 +58,7 @@ const EmailTemplate = (
             margin: '20px 0', 
           }}
         />
-        <Text style={footer}>gRabbit is small dosage of positivity encouragement.</Text>
+        <Text style={footer}>gRabbit is a small dosage of positivity encouragement.</Text>
         <Text style={footer}>Good Rabbit Foundation.</Text>
         <Text style={footer}>
           This address will not receive email replies.
