@@ -12,7 +12,7 @@ const generateMessage = async ({
           Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
         },
         body: JSON.stringify({
-          model: "text-davinci-003",
+          model: "gpt-3.5-turbo-0125",
           prompt: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
           max_tokens: 120,
           temperature: 1,
