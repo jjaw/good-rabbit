@@ -24,7 +24,7 @@ const generateMessage = async ({
     const GPTdata = await response.json();
     
     
-    return GPTdata.choices[0].text;
+    return GPTdata.choices[0].message.content;
 
   } catch (err) {
     console.error(err);
