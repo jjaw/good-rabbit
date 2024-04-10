@@ -13,7 +13,7 @@ const generateMessage = async ({
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo-instruct",
-          prompt: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
+          message: [{role: "user", content: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`],
           max_tokens: 120,
           temperature: 1,
           top_p: 0.77,
