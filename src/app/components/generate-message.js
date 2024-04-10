@@ -13,7 +13,7 @@ const generateMessage = async ({
         },
         body: JSON.stringify({
           model: "gpt-3.5-turbo-instruct",
-          messages: [{role: "user", content: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`}],
+          prompt: `Write a nice message (no more than 88 words) of positivity for ${recipientName}. I am a friend but that's irrelevant. Some relevant information are ${extra}.`,
           max_tokens: 120,
           temperature: 1,
           top_p: 0.77,
@@ -24,7 +24,7 @@ const generateMessage = async ({
     const GPTdata = await response.json();
     
     
-    return GPTdata.choices[0].message.content;
+    return GPTdata.choices[0].text.trim();
 
   } catch (err) {
     console.error(err);
