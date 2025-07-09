@@ -1,12 +1,12 @@
 // senti-analysis.js
 /**
- * Send text to Hugging Face’s sentiment-analysis model
+ * Send text to Hugging Face's sentiment-analysis model
  * and return the parsed result, while logging and bubbling up
  * any raw non-JSON response.
  */
 export async function querySentiment(text) {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english",
+    "https://api-inference.huggingface.co/models/cardiffnlp/twitter-roberta-base-sentiment-latest",
     {
       method: "POST",
       headers: {

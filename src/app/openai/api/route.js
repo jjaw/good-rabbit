@@ -26,7 +26,9 @@ export async function POST(req) {
       const label = jsonResponse[0][0].label;
       console.log("Sentiment label:", label);
 
-      if (label === "POSITIVE") {
+      // cardiffnlp/twitter-roberta-base-sentiment-latest returns:
+      // LABEL_0 = negative, LABEL_1 = neutral, LABEL_2 = positive
+      if (label === "LABEL_2") {
         try {
           await resend.emails.send({
             from: "hello@goodrabb.it",
