@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import EmailTemplate from "@/app/components/email-template";
 import { Resend } from "resend";
-import { query } from "@/app/components/senti-analysis";
+import { querySentiment } from "@/app/components/senti-analysis";
 import generateMessage from "@/app/components/generate-message"
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -31,7 +31,7 @@ export async function POST(req) {
     // Text sentiment analysis
     try {
       console.log("try sentiment analysis")
-      const jsonResponse = await query(message);
+      const jsonResponse = await querySentiment(message);
       const label = jsonResponse[0][0].label;
       console.log("Sentiment... " + label);
       console.log("Message: " + message);
