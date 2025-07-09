@@ -3,6 +3,9 @@
  * Send text to Hugging Face’s sentiment-analysis model
  * and return the parsed result, logging raw responses.
  */
+
+console.log('🔥 INFERENCE_API_KEY present?', !!process.env.INFERENCE_API_KEY);
+
 export async function querySentiment(text) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english",
