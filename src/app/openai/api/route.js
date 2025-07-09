@@ -28,10 +28,10 @@ export async function POST(req) {
 
       // Handle both model response formats:
       // cardiffnlp/twitter-roberta-base-sentiment-latest returns: LABEL_0 (negative), LABEL_1 (neutral), LABEL_2 (positive)
-      // ProsusAI/finbert returns: POSITIVE, NEGATIVE
-      const isPositive = label === "LABEL_2" || label === "POSITIVE";
+      // ProsusAI/finbert returns: POSITIVE, NEGATIVE (no neutral option)
+      const isAcceptable = label === "LABEL_1" || label === "LABEL_2" || label === "POSITIVE";
       
-      if (isPositive) {
+      if (isAcceptable) {
         try {
           await resend.emails.send({
             from: "hello@goodrabb.it",
