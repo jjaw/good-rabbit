@@ -1,11 +1,9 @@
 // senti-analysis.js
 /**
  * Send text to Hugging Face’s sentiment-analysis model
- * and return the parsed result, logging raw responses.
+ * and return the parsed result, while logging and bubbling up
+ * any raw non-JSON response.
  */
-
-console.log('🔥 INFERENCE_API_KEY present?', !!process.env.INFERENCE_API_KEY);
-
 export async function querySentiment(text) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english",
@@ -19,19 +17,18 @@ export async function querySentiment(text) {
     }
   );
 
-  // Grab raw text so we can log exactly what HF returned
+  // Grab the raw body so we can inspect it
   const raw = await response.text();
   console.log(`HF returned ${response.status}:`, raw);
 
-  // Parse JSON (or throw if malformed)
   let result;
   try {
     result = JSON.parse(raw);
   } catch (err) {
-    throw new Error(`Invalid JSON from HF: ${err.message}`);
+    // Include the raw in the thrown error for visibility
+    throw new Error(`Invalid JSON from HF: ${err.message}; raw: ${raw}`);
   }
 
-  // If HF returned an error status, include the message
   if (!response.ok) {
     throw new Error(
       `Hugging Face error ${response.status}: ${result.error || raw}`
