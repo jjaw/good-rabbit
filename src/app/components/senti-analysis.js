@@ -1,39 +1,39 @@
-// src/lib/sentiment.js
-
+// senti-analysis.js
 /**
- * Classify a piece of text with distilbert-sst2 via Hugging Face’s serverless API.
- * @param {string} text  The text to analyze.
- * @returns {Promise<Array<{ label: string, score: number }>>}
+ * Send text to Hugging Face’s sentiment-analysis model
+ * and return the parsed result, logging raw responses.
  */
 export async function querySentiment(text) {
-  const API_URL =
-    "https://router.huggingface.co/hf-inference/models/distilbert-base-uncased-finetuned-sst-2-english";
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english",
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.INFERENCE_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ inputs: text }),
+    }
+  );
 
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.HF_TOKEN}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ inputs: text }),
-  });
-
-  // Log raw status & body for easier debugging
+  // Grab raw text so we can log exactly what HF returned
   const raw = await response.text();
-  console.log("HF status:", response.status, response.statusText);
-  console.log("HF body:", raw);
+  console.log(`HF returned ${response.status}:`, raw);
 
-  let data;
+  // Parse JSON (or throw if malformed)
+  let result;
   try {
-    data = JSON.parse(raw);
-  } catch {
-    throw new Error(`Non-JSON response from HF: ${raw}`);
+    result = JSON.parse(raw);
+  } catch (err) {
+    throw new Error(`Invalid JSON from HF: ${err.message}`);
   }
 
+  // If HF returned an error status, include the message
   if (!response.ok) {
-    // Propagate the API’s own error message when available
-    throw new Error(data.error || `HF error ${response.status}`);
+    throw new Error(
+      `Hugging Face error ${response.status}: ${result.error || raw}`
+    );
   }
 
-  return data;  // e.g. [ { label: "POSITIVE", score: 0.99 } ]
+  return result;
 }
