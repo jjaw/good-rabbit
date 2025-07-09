@@ -1,33 +1,39 @@
 // src/lib/sentiment.js
 
 /**
- * Send a text string to Hugging Face’s sentiment-analysis model
- * (distilbert-base-uncased-finetuned-sst-2-english) and return the result.
- *
- * @param {string} text  The text you want to classify.
- * @returns {Promise<Object[]>}  An array of { label, score } objects.
+ * Classify a piece of text with distilbert-sst2 via Hugging Face’s serverless API.
+ * @param {string} text  The text to analyze.
+ * @returns {Promise<Array<{ label: string, score: number }>>}
  */
 export async function querySentiment(text) {
-  const response = await fetch(
-    "https://api-inference.huggingface.co/models/distilbert-base-uncased-finetuned-sst-2-english",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.INFERENCE_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: text
-      }),
-    }
-  );
+  const API_URL =
+    "https://router.huggingface.co/hf-inference/models/distilbert-base-uncased-finetuned-sst-2-english";
 
-  const result = await response.json();
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.HF_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ inputs: text }),
+  });
 
-  if (!response.ok) {
-    // Surface the HF error message if available
-    throw new Error(result.error || "Hugging Face inference error");
+  // Log raw status & body for easier debugging
+  const raw = await response.text();
+  console.log("HF status:", response.status, response.statusText);
+  console.log("HF body:", raw);
+
+  let data;
+  try {
+    data = JSON.parse(raw);
+  } catch {
+    throw new Error(`Non-JSON response from HF: ${raw}`);
   }
 
-  return result;
+  if (!response.ok) {
+    // Propagate the API’s own error message when available
+    throw new Error(data.error || `HF error ${response.status}`);
+  }
+
+  return data;  // e.g. [ { label: "POSITIVE", score: 0.99 } ]
 }
