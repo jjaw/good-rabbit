@@ -5,6 +5,8 @@
  * any raw non-JSON response.
  */
 
+import { HFResponseSchema, HFNestedResponseSchema } from "./senti-schema";
+
 // Test function to check if API key is valid
 export async function testAPIKey() {
   if (!process.env.INFERENCE_API_KEY) {
@@ -89,5 +91,22 @@ export async function querySentiment(text) {
     );
   }
 
-  return result;
+  // ─── Validate via Zod ──────────────────────────────────────────────────────
+  // Try flat array format first
+  let parsed = HFResponseSchema.safeParse(result);
+  
+  // If that fails, try nested array format
+  if (!parsed.success) {
+    parsed = HFNestedResponseSchema.safeParse(result);
+    if (!parsed.success) {
+      console.error("Invalid HF response schema:", parsed.error);
+      console.error("Raw response:", result);
+      throw new Error(
+        `Unexpected HF response shape: ${parsed.error.issues.map(i => i.message).join(", ")}`
+      );
+    }
+  }
+
+  // Return the validated data
+  return parsed.data;
 }
