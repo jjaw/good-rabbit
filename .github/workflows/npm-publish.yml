@@ -1,0 +1,48 @@
+# This workflow installs dependencies, lints, builds, and runs tests on Node.js
+# for pushes and pull requests targeting the main and dev branches
+# For more information see: https://docs.github.com/actions
+
+name: good-rabbit CI
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+  pull_request:
+    branches: [ "main", "dev" ]
+  workflow_dispatch:
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      INFERENCE_API_KEY: ${{ secrets.INFERENCE_API_KEY }}
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: |
+          npm ci
+      - name: Lint
+        run: |
+          npm run lint
+      - name: Build
+        run: |
+          npm run build
+      - name: Test
+        run: |
+          npm test
