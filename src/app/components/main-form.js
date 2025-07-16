@@ -82,7 +82,7 @@ export default function Form() {
           />
         </div>
         <div className="flex flex-col">
-          <label className="sr-only" htmlFor="recipientName">Recipient's Name:</label>
+          <label className="sr-only" htmlFor="recipientName">Recipient&apos;s Name:</label>
           <input 
             type="text" 
             id="recipientName" 
