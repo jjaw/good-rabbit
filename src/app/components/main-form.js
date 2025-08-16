@@ -1,9 +1,8 @@
 "use client"
 
 import { useState } from "react";
-import { ShimmerButton } from "./shimmer-button";
-import { MagicCard } from "./magic-card";
-import { ShineBorder } from "./shine-border";
+import { Card, TextInput, Textarea, Button, Stack, Text } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
 
 export default function Form() {
   const [formData, setFormData] = useState({
@@ -54,100 +53,177 @@ export default function Form() {
           throw new Error("An error has occurred");
         }
       }
-      alert('Positivity sent to your friend~ gRabbit');
+      notifications.show({
+        title: 'Success!',
+        message: 'Positivity sent to your friend~ gRabbit',
+        color: 'pastelPink'
+      });
 
     } catch (err) {
       console.error(err);
       if (err.message == "say nicer things~") {
-        alert("Say nice things ~ Spread positivity");
+        notifications.show({
+          title: 'Error',
+          message: "Say nice things ~ Spread positivity",
+          color: 'red'
+        });
       } else {
-        alert("an error has occured");
+        notifications.show({
+          title: 'Error', 
+          message: "An error has occurred",
+          color: 'red'
+        });
       }
     }
     setIsGenerating(false);
   }
 
   return(
-  <div className="w-full">
-    <MagicCard className="group bg-slate-800/95 backdrop-blur-sm border border-slate-600/50 shadow-2xl ring-1 ring-orange-400/20">
-      <form onSubmit={handleSubmit} className="grid gap-y-5 text-slate-200">
-        <div className="flex flex-col">
-          <label className="sr-only" htmlFor="senderName">Your Name:</label>
-          <ShineBorder>
-            <input 
-              type="text" 
-              id="senderName" 
-              name="senderName"
-              maxLength={50}
-              value={formData.senderName}
-              placeholder="Your Name (Optional)"
-              onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
-            />
-          </ShineBorder>
-        </div>
-        <div className="flex flex-col">
-          <label className="sr-only" htmlFor="recipientName">Recipient&apos;s Name:</label>
-          <ShineBorder>
-            <input 
-              type="text" 
-              id="recipientName" 
-              name="recipientName" 
-              maxLength={88}
-              value={formData.recipientName}
-              placeholder="Their Name"
-              onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
-              required />
-          </ShineBorder>
-          <label className="sr-only" htmlFor="email">Their Email:</label>
-        </div>
-        <div className="flex flex-col">
-          <ShineBorder>
-            <input 
-              type="email" 
-              id="email" 
-              name="email" 
-              maxLength={50}
-              value={formData.email}
-              placeholder="Their Email"
-              onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
-              required />
-          </ShineBorder>
-        </div>
-        <div className="flex flex-col">
-          <label className="sr-only" htmlFor="extra">Anything you want to ADD? (Optional)</label>
-          <ShineBorder>
-            <textarea
-              rows={7}
-              maxLength={200}
-              id="extra"
+    <Card 
+      shadow="xl" 
+      padding="xl" 
+      radius="lg"
+      style={{
+        background: 'rgba(255, 255, 255, 0.9)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 175, 204, 0.3)',
+        boxShadow: '0 25px 50px -12px rgba(205, 180, 219, 0.4), 0 0 0 1px rgba(255, 200, 221, 0.3)'
+      }}
+    >
+      <form onSubmit={handleSubmit}>
+        <Stack gap="lg">
+          <TextInput
+            name="senderName"
+            value={formData.senderName}
+            onChange={(e) => handleInput(e)}
+            placeholder="Your Name (Optional)"
+            maxLength={50}
+            variant="filled"
+            size="md"
+            styles={{
+              input: {
+                background: 'rgba(255, 175, 204, 0.1)',
+                border: '1px solid rgba(255, 175, 204, 0.4)',
+                color: '#4a5568',
+                '&::placeholder': {
+                  color: 'rgba(205, 180, 219, 0.7)'
+                },
+                '&:focus': {
+                  borderColor: '#ffafcc',
+                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
+                }
+              }
+            }}
+          />
+          
+          <TextInput
+            name="recipientName"
+            value={formData.recipientName}
+            onChange={(e) => handleInput(e)}
+            placeholder="Their Name"
+            maxLength={88}
+            required
+            variant="filled"
+            size="md"
+            styles={{
+              input: {
+                background: 'rgba(255, 175, 204, 0.1)',
+                border: '1px solid rgba(255, 175, 204, 0.4)',
+                color: '#4a5568',
+                '&::placeholder': {
+                  color: 'rgba(205, 180, 219, 0.7)'
+                },
+                '&:focus': {
+                  borderColor: '#ffafcc',
+                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
+                }
+              }
+            }}
+          />
+          
+          <TextInput
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={(e) => handleInput(e)}
+            placeholder="Their Email"
+            maxLength={50}
+            required
+            variant="filled"
+            size="md"
+            styles={{
+              input: {
+                background: 'rgba(255, 175, 204, 0.1)',
+                border: '1px solid rgba(255, 175, 204, 0.4)',
+                color: '#4a5568',
+                '&::placeholder': {
+                  color: 'rgba(205, 180, 219, 0.7)'
+                },
+                '&:focus': {
+                  borderColor: '#ffafcc',
+                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
+                }
+              }
+            }}
+          />
+          
+          <div>
+            <Textarea
               name="extra"
               value={formData.extra}
+              onChange={(e) => handleInput(e)}
               placeholder="Anything you want to ADD? (Optional)"
-              onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base resize-none"
+              maxLength={200}
+              rows={7}
+              variant="filled"
+              size="md"
+              resize="none"
+              styles={{
+                input: {
+                  background: 'rgba(255, 175, 204, 0.1)',
+                  border: '1px solid rgba(255, 175, 204, 0.4)',
+                  color: '#4a5568',
+                  '&::placeholder': {
+                    color: 'rgba(205, 180, 219, 0.7)'
+                  },
+                  '&:focus': {
+                    borderColor: '#ffafcc',
+                    boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
+                  }
+                }
+              }}
             />
-          </ShineBorder>
-          <div className="text-orange-400/70 text-right py-2 text-sm">{characterCount} / 200</div>
-        </div>
-        <ShimmerButton 
-          type="submit"
-          className={`w-full py-3 text-base font-semibold ${
-              isGenerating || formData.email === "" || formData.recipientName == ""
-                ? "cursor-not-allowed opacity-50"
-                : ""
-            }`}
-          disabled={isGenerating || formData.email === "" || formData.recipientName == ""}
-          background="rgba(251, 146, 60, 1)"
-          shimmerColor="#fed7aa"
-          borderRadius="8px"
-        >
-          {isGenerating ? "Sending..." : "Send Positivity"}
-        </ShimmerButton>
+            <Text size="sm" c="pastelPurple.5" ta="right" mt="xs">
+              {characterCount} / 200
+            </Text>
+          </div>
+          
+          <Button
+            type="submit"
+            disabled={isGenerating || formData.email === "" || formData.recipientName === ""}
+            loading={isGenerating}
+            size="md"
+            fullWidth
+            variant="gradient"
+            gradient={{ from: 'pastelRose.5', to: 'pastelPink.6', deg: 45 }}
+            styles={{
+              root: {
+                fontWeight: 600,
+                fontSize: '16px',
+                height: '48px',
+                border: '1px solid rgba(255, 175, 204, 0.4)',
+                boxShadow: '0 4px 14px 0 rgba(255, 175, 204, 0.4)',
+                '&:hover': {
+                  transform: 'translateY(-1px)',
+                  boxShadow: '0 6px 20px 0 rgba(255, 175, 204, 0.5)'
+                }
+              }
+            }}
+          >
+            {isGenerating ? "Sending..." : "Send Positivity"}
+          </Button>
+        </Stack>
       </form>
-    </MagicCard>
-  </div>
+    </Card>
   )
 }
