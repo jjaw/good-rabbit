@@ -3,7 +3,7 @@ import Form from './components/main-form';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-4 py-8 md:px-8 lg:px-12 bg-stone-100/30">
+    <main className="flex min-h-screen flex-col items-center justify-center px-4 py-8 md:px-8 lg:px-12 bg-gradient-to-br from-stone-50 to-stone-100">
       {/* Header */}
       <div className="w-full max-w-4xl mb-8 text-center">
         <div className="mb-4">

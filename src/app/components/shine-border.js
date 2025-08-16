@@ -7,14 +7,14 @@ export const ShineBorder = ({
   className,
   borderRadius = 8,
   borderWidth = 1,
-  color = "#a8a29e",
+  color = "#78716c",
   children,
   ...props
 }) => {
   return (
     <div
       className={cn(
-        "relative rounded-lg bg-white/90 backdrop-blur-3xl border border-stone-200/50",
+        "relative rounded-lg bg-white backdrop-blur-3xl border border-stone-200/60 shadow-sm",
         className,
       )}
       style={{

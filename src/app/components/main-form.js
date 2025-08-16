@@ -69,7 +69,7 @@ export default function Form() {
 
   return(
   <div className="w-full">
-    <MagicCard className="group bg-stone-50/95 backdrop-blur-sm border border-stone-200 shadow-xl">
+    <MagicCard className="group bg-white/95 backdrop-blur-sm border border-stone-200 shadow-xl">
       <form onSubmit={handleSubmit} className="grid gap-y-5 text-stone-700">
         <div className="flex flex-col">
           <label className="sr-only" htmlFor="senderName">Your Name:</label>
@@ -140,8 +140,8 @@ export default function Form() {
                 : ""
             }`}
           disabled={isGenerating || formData.email === "" || formData.recipientName == ""}
-          background="rgba(120, 113, 108, 1)"
-          shimmerColor="#d6d3d1"
+          background="rgba(87, 83, 78, 1)"
+          shimmerColor="#e7e5e4"
           borderRadius="8px"
         >
           {isGenerating ? "Sending..." : "Send Positivity"}
