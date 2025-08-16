@@ -16,6 +16,22 @@ export default function Form() {
 
   const [isGenerating, setIsGenerating] = useState(false); // Check to see if response is generating
 
+  // Shared input styles for consistency
+  const inputStyles = {
+    input: {
+      background: 'rgba(255, 175, 204, 0.1)',
+      border: '1px solid rgba(255, 175, 204, 0.4)',
+      color: '#4a5568',
+      '&::placeholder': {
+        color: 'rgba(205, 180, 219, 0.7)'
+      },
+      '&:focus': {
+        borderColor: '#ffafcc',
+        boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
+      }
+    }
+  };
+
   const handleInput = (e) => {
     const fieldName = e.target.name;
     const fieldValue = e.target.value;
@@ -100,20 +116,7 @@ export default function Form() {
             maxLength={50}
             variant="filled"
             size="md"
-            styles={{
-              input: {
-                background: 'rgba(255, 175, 204, 0.1)',
-                border: '1px solid rgba(255, 175, 204, 0.4)',
-                color: '#4a5568',
-                '&::placeholder': {
-                  color: 'rgba(205, 180, 219, 0.7)'
-                },
-                '&:focus': {
-                  borderColor: '#ffafcc',
-                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
-                }
-              }
-            }}
+            styles={inputStyles}
           />
           
           <TextInput
@@ -125,20 +128,7 @@ export default function Form() {
             required
             variant="filled"
             size="md"
-            styles={{
-              input: {
-                background: 'rgba(255, 175, 204, 0.1)',
-                border: '1px solid rgba(255, 175, 204, 0.4)',
-                color: '#4a5568',
-                '&::placeholder': {
-                  color: 'rgba(205, 180, 219, 0.7)'
-                },
-                '&:focus': {
-                  borderColor: '#ffafcc',
-                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
-                }
-              }
-            }}
+            styles={inputStyles}
           />
           
           <TextInput
@@ -151,20 +141,7 @@ export default function Form() {
             required
             variant="filled"
             size="md"
-            styles={{
-              input: {
-                background: 'rgba(255, 175, 204, 0.1)',
-                border: '1px solid rgba(255, 175, 204, 0.4)',
-                color: '#4a5568',
-                '&::placeholder': {
-                  color: 'rgba(205, 180, 219, 0.7)'
-                },
-                '&:focus': {
-                  borderColor: '#ffafcc',
-                  boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
-                }
-              }
-            }}
+            styles={inputStyles}
           />
           
           <div>
@@ -178,20 +155,7 @@ export default function Form() {
               variant="filled"
               size="md"
               resize="none"
-              styles={{
-                input: {
-                  background: 'rgba(255, 175, 204, 0.1)',
-                  border: '1px solid rgba(255, 175, 204, 0.4)',
-                  color: '#4a5568',
-                  '&::placeholder': {
-                    color: 'rgba(205, 180, 219, 0.7)'
-                  },
-                  '&:focus': {
-                    borderColor: '#ffafcc',
-                    boxShadow: '0 0 0 2px rgba(255, 175, 204, 0.3)'
-                  }
-                }
-              }}
+              styles={inputStyles}
             />
             <Text size="sm" c="pastelPurple.5" ta="right" mt="xs">
               {characterCount} / 200
@@ -214,7 +178,6 @@ export default function Form() {
                 border: '1px solid rgba(255, 175, 204, 0.4)',
                 boxShadow: '0 4px 14px 0 rgba(255, 175, 204, 0.4)',
                 '&:hover': {
-                  transform: 'translateY(-1px)',
                   boxShadow: '0 6px 20px 0 rgba(255, 175, 204, 0.5)'
                 }
               }
