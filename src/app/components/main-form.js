@@ -1,6 +1,9 @@
 "use client"
 
 import { useState } from "react";
+import { ShimmerButton } from "./shimmer-button";
+import { MagicCard } from "./magic-card";
+import { ShineBorder } from "./shine-border";
 
 export default function Form() {
   const [formData, setFormData] = useState({
@@ -65,76 +68,86 @@ export default function Form() {
   }
 
   return(
-  <div className="max-w-7x1 w-full mx-auto sm:px-6 lg:px-8 py-12">
-    <div className="grid gap-y-12 md:grid-cols-1 md:gap-x-12 ">
-      <form onSubmit={handleSubmit} className="grid gap-y-5 text-amber-700 mx-2">
+  <div className="w-full">
+    <MagicCard className="group bg-stone-50/95 backdrop-blur-sm border border-stone-200 shadow-xl">
+      <form onSubmit={handleSubmit} className="grid gap-y-5 text-stone-700">
         <div className="flex flex-col">
           <label className="sr-only" htmlFor="senderName">Your Name:</label>
-          <input 
-            type="text" 
-            id="senderName" 
-            name="senderName"
-            maxLength={50}
-            value={formData.senderName}
-            placeholder="Your Name (Optional)"
-            onChange={handleInput}
-            className="px-2 block w-full rounded-md bg-white border border-gray-40 shadow-s focus:outline-none focus:outline-amber-300"
-          />
+          <ShineBorder>
+            <input 
+              type="text" 
+              id="senderName" 
+              name="senderName"
+              maxLength={50}
+              value={formData.senderName}
+              placeholder="Your Name (Optional)"
+              onChange={handleInput}
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+            />
+          </ShineBorder>
         </div>
         <div className="flex flex-col">
           <label className="sr-only" htmlFor="recipientName">Recipient&apos;s Name:</label>
-          <input 
-            type="text" 
-            id="recipientName" 
-            name="recipientName" 
-            maxLength={88}
-            value={formData.recipientName}
-            placeholder="Their Name"
-            onChange={handleInput}
-            className="px-2 block w-full rounded-md bg-white border border-gray-40 shadow-s focus:outline-none focus:outline-amber-300"
-            required />
+          <ShineBorder>
+            <input 
+              type="text" 
+              id="recipientName" 
+              name="recipientName" 
+              maxLength={88}
+              value={formData.recipientName}
+              placeholder="Their Name"
+              onChange={handleInput}
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+              required />
+          </ShineBorder>
           <label className="sr-only" htmlFor="email">Their Email:</label>
         </div>
         <div className="flex flex-col">
-          <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            maxLength={50}
-            value={formData.email}
-            placeholder="Their Email"
-            onChange={handleInput}
-            className="px-2 block w-full rounded-md bg-white border border-gray-40 shadow-s focus:outline-none focus:outline-amber-300"
-            required />
+          <ShineBorder>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              maxLength={50}
+              value={formData.email}
+              placeholder="Their Email"
+              onChange={handleInput}
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+              required />
+          </ShineBorder>
         </div>
         <div className="flex flex-col">
           <label className="sr-only" htmlFor="extra">Anything you want to ADD? (Optional)</label>
-          <textarea
-            rows={7}
-            maxLength={200}
-            id="extra"
-            name="extra"
-            value={formData.extra}
-            placeholder="Anything you want to ADD? (Optional)"
-            onChange={handleInput}
-            className="px-2 py-0.5 block w-full rounded-md bg-white border border-gray-40 shadow-s focus:outline-none focus:outline-amber-300"
-          />
-          <div className="text-slate-400 text-right py-2">{characterCount} / 200</div>
+          <ShineBorder>
+            <textarea
+              rows={7}
+              maxLength={200}
+              id="extra"
+              name="extra"
+              value={formData.extra}
+              placeholder="Anything you want to ADD? (Optional)"
+              onChange={handleInput}
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base resize-none"
+            />
+          </ShineBorder>
+          <div className="text-stone-400 text-right py-2 text-sm">{characterCount} / 200</div>
         </div>
-        <button 
+        <ShimmerButton 
           type="submit"
-          className={`bg-transparent hover:bg-amber-600 text-amber-500 font-semibold hover:text-white py-2 px-4 border border-amber-500 hover:border-transparent rounded
-            ${
+          className={`w-full py-3 text-base font-semibold ${
               isGenerating || formData.email === "" || formData.recipientName == ""
                 ? "cursor-not-allowed opacity-50"
                 : ""
             }`}
           disabled={isGenerating || formData.email === "" || formData.recipientName == ""}
+          background="rgba(120, 113, 108, 1)"
+          shimmerColor="#d6d3d1"
+          borderRadius="8px"
         >
           {isGenerating ? "Sending..." : "Send Positivity"}
-        </button>
+        </ShimmerButton>
       </form>
-    </div>
+    </MagicCard>
   </div>
   )
 }
