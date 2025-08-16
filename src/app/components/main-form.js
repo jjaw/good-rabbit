@@ -69,8 +69,8 @@ export default function Form() {
 
   return(
   <div className="w-full">
-    <MagicCard className="group bg-white/95 backdrop-blur-sm border border-stone-200 shadow-xl">
-      <form onSubmit={handleSubmit} className="grid gap-y-5 text-stone-700">
+    <MagicCard className="group bg-slate-800/95 backdrop-blur-sm border border-slate-600/50 shadow-2xl ring-1 ring-orange-400/20">
+      <form onSubmit={handleSubmit} className="grid gap-y-5 text-slate-200">
         <div className="flex flex-col">
           <label className="sr-only" htmlFor="senderName">Your Name:</label>
           <ShineBorder>
@@ -82,7 +82,7 @@ export default function Form() {
               value={formData.senderName}
               placeholder="Your Name (Optional)"
               onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
             />
           </ShineBorder>
         </div>
@@ -97,7 +97,7 @@ export default function Form() {
               value={formData.recipientName}
               placeholder="Their Name"
               onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
               required />
           </ShineBorder>
           <label className="sr-only" htmlFor="email">Their Email:</label>
@@ -112,7 +112,7 @@ export default function Form() {
               value={formData.email}
               placeholder="Their Email"
               onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base"
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base"
               required />
           </ShineBorder>
         </div>
@@ -127,10 +127,10 @@ export default function Form() {
               value={formData.extra}
               placeholder="Anything you want to ADD? (Optional)"
               onChange={handleInput}
-              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-stone-800 placeholder:text-stone-500 font-medium text-base resize-none"
+              className="px-3 py-3 block w-full rounded-md bg-transparent border-0 focus:outline-none text-slate-100 placeholder:text-orange-300/60 font-medium text-base resize-none"
             />
           </ShineBorder>
-          <div className="text-stone-400 text-right py-2 text-sm">{characterCount} / 200</div>
+          <div className="text-orange-400/70 text-right py-2 text-sm">{characterCount} / 200</div>
         </div>
         <ShimmerButton 
           type="submit"
@@ -140,8 +140,8 @@ export default function Form() {
                 : ""
             }`}
           disabled={isGenerating || formData.email === "" || formData.recipientName == ""}
-          background="rgba(87, 83, 78, 1)"
-          shimmerColor="#e7e5e4"
+          background="rgba(251, 146, 60, 1)"
+          shimmerColor="#fed7aa"
           borderRadius="8px"
         >
           {isGenerating ? "Sending..." : "Send Positivity"}
